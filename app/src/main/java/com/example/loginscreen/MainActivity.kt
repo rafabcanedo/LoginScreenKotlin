@@ -1,6 +1,8 @@
 package com.example.loginscreen
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -15,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var loginButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        getSupportActionBar()?.hide()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
@@ -24,14 +28,20 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        UsernameInput = findViewById<InputUsername>(R.id.input_username)
-        PasswordInput = findViewById<InputPassword>(R.id.input_password)
-        LoginButton = findViewById<ButtonLogin>(R.id.button_login)
+        usernameInput = findViewById(R.id.input_username)
+        passwordInput = findViewById(R.id.input_password)
+        loginButton = findViewById(R.id.button_login)
 
         loginButton.setOnClickListener {
             val username = usernameInput.text.toString()
             val password = passwordInput.text.toString()
             Log.i("Credentials", "Username: $username and Password: $password")
+        }
+
+        val secondRouteButton = findViewById<Button>(R.id.register_route)
+        secondRouteButton.setOnClickListener {
+            val Intent = Intent(this,register::class.java)
+            startActivity(Intent)
         }
     }
 }
